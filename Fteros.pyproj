@@ -1,0 +1,190 @@
+<Project DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003" ToolsVersion="4.0">
+  <PropertyGroup>
+    <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>
+    <Name>Fteros</Name>
+    <RootNamespace>Fteros</RootNamespace>
+    <InterpreterId>MSBuild|env|$(MSBuildProjectFullPath)</InterpreterId>
+    <WebBrowserPort>5050</WebBrowserPort>
+  </PropertyGroup>
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <SchemaVersion>2.0</SchemaVersion>
+    <ProjectGuid>29017e58-3642-44a8-943e-b4828cdd9635</ProjectGuid>
+    <ProjectHome>.</ProjectHome>
+    <ProjectTypeGuids>{5F0BE9CA-D677-4A4D-8806-6076C0FAAD37};{349c5851-65df-11da-9384-00065b846f21};{888888a0-9f3d-457c-b088-3a5042f75d52}</ProjectTypeGuids>
+    <StartupFile>manage.py</StartupFile>
+    <SearchPath>
+    </SearchPath>
+    <WorkingDirectory>.</WorkingDirectory>
+    <LaunchProvider>Django launcher</LaunchProvider>
+    <DjangoSettingsModule>Fteros.settings</DjangoSettingsModule>
+    <WebBrowserUrl>http://localhost</WebBrowserUrl>
+    <OutputPath>.</OutputPath>
+    <SuppressCollectPythonCloudServiceFiles>true</SuppressCollectPythonCloudServiceFiles>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)' == 'Debug' ">
+    <DebugSymbols>true</DebugSymbols>
+    <EnableUnmanagedDebugging>false</EnableUnmanagedDebugging>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)' == 'Release' ">
+    <DebugSymbols>true</DebugSymbols>
+    <EnableUnmanagedDebugging>false</EnableUnmanagedDebugging>
+  </PropertyGroup>
+  <ItemGroup>
+    <Compile Include="crm\admin.py" />
+    <Compile Include="crm\api\serializers.py">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="crm\api\urls.py">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="crm\api\views.py">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="crm\api\__init__.py">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="crm\apps.py" />
+    <Compile Include="crm\migrations\__init__.py" />
+    <Compile Include="crm\models.py" />
+    <Compile Include="crm\tests.py" />
+    <Compile Include="crm\views.py" />
+    <Compile Include="crm\__init__.py" />
+    <Compile Include="Fteros\settings.py" />
+    <Compile Include="gds\admin.py" />
+    <Compile Include="gds\api\serializers.py">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="gds\api\urls.py">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="gds\api\views.py">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="gds\api\__init__.py">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="gds\apps.py" />
+    <Compile Include="gds\dbtests.py">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="gds\migrations\__init__.py" />
+    <Compile Include="gds\models.py" />
+    <Compile Include="gds\request\fetchdata.py">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="gds\request\myXML.py">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="gds\request\pnr.py">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="gds\request\__init__.py">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="gds\views.py" />
+    <Compile Include="gds\__init__.py" />
+    <Compile Include="manage.py" />
+    <Compile Include="Fteros\__init__.py" />
+    <Compile Include="settings\base.py">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="settings\production.py" />
+    <Compile Include="Fteros\urls.py" />
+    <Compile Include="Fteros\wsgi.py" />
+    <Compile Include="settings\__init__.py">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="util\admin.py" />
+    <Compile Include="util\api\views.py">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="util\api\urls.py">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="util\api\serializers.py">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="util\api\__init__.py" />
+    <Compile Include="util\apps.py" />
+    <Compile Include="util\migrations\__init__.py" />
+    <Compile Include="util\models.py" />
+    <Compile Include="util\tests.py" />
+    <Compile Include="util\views.py" />
+    <Compile Include="util\__init__.py" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="crm\templates\index.html" />
+    <Content Include="gds\templates\index.html" />
+    <Content Include="requirements.txt" />
+    <Content Include="util\templates\index.html" />
+  </ItemGroup>
+  <ItemGroup>
+    <Folder Include="crm\" />
+    <Folder Include="crm\migrations\" />
+    <Folder Include="crm\api\" />
+    <Folder Include="crm\templates\" />
+    <Folder Include="Fteros\" />
+    <Folder Include="gds\" />
+    <Folder Include="gds\migrations\" />
+    <Folder Include="gds\api\" />
+    <Folder Include="gds\request\" />
+    <Folder Include="gds\templates\" />
+    <Folder Include="settings\" />
+    <Folder Include="util\" />
+    <Folder Include="util\migrations\" />
+    <Folder Include="util\api\" />
+    <Folder Include="util\templates\" />
+  </ItemGroup>
+  <ItemGroup>
+    <Interpreter Include="env\">
+      <Id>env</Id>
+      <Version>3.6</Version>
+      <Description>env (Python 3.6 (64-bit))</Description>
+      <InterpreterPath>Scripts\python.exe</InterpreterPath>
+      <WindowsInterpreterPath>Scripts\pythonw.exe</WindowsInterpreterPath>
+      <PathEnvironmentVariable>PYTHONPATH</PathEnvironmentVariable>
+      <Architecture>X64</Architecture>
+    </Interpreter>
+  </ItemGroup>
+  <Import Project="$(MSBuildExtensionsPath32)\Microsoft\VisualStudio\v$(VisualStudioVersion)\Python Tools\Microsoft.PythonTools.Django.targets" />
+  <!-- Specify pre- and post-build commands in the BeforeBuild and 
+       AfterBuild targets below. -->
+  <Target Name="BeforeBuild">
+  </Target>
+  <Target Name="AfterBuild">
+  </Target>
+  <ProjectExtensions>
+    <VisualStudio>
+      <FlavorProperties GUID="{349c5851-65df-11da-9384-00065b846f21}">
+        <WebProjectProperties>
+          <AutoAssignPort>True</AutoAssignPort>
+          <UseCustomServer>True</UseCustomServer>
+          <CustomServerUrl>http://localhost</CustomServerUrl>
+          <SaveServerSettingsInUserFile>False</SaveServerSettingsInUserFile>
+        </WebProjectProperties>
+      </FlavorProperties>
+      <FlavorProperties GUID="{349c5851-65df-11da-9384-00065b846f21}" User="">
+        <WebProjectProperties>
+          <StartPageUrl>
+          </StartPageUrl>
+          <StartAction>CurrentPage</StartAction>
+          <AspNetDebugging>True</AspNetDebugging>
+          <SilverlightDebugging>False</SilverlightDebugging>
+          <NativeDebugging>False</NativeDebugging>
+          <SQLDebugging>False</SQLDebugging>
+          <ExternalProgram>
+          </ExternalProgram>
+          <StartExternalURL>
+          </StartExternalURL>
+          <StartCmdLineArguments>
+          </StartCmdLineArguments>
+          <StartWorkingDirectory>
+          </StartWorkingDirectory>
+          <EnableENC>False</EnableENC>
+          <AlwaysStartWebServerOnDebug>False</AlwaysStartWebServerOnDebug>
+        </WebProjectProperties>
+      </FlavorProperties>
+    </VisualStudio>
+  </ProjectExtensions>
+</Project>
