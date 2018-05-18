@@ -118,6 +118,35 @@ class CustomerReadSerializer(serializers.ModelSerializer):
             'group'
         ]
 
+class CustomerMarkupPostSerializer(serializers.ModelSerializer):
+
+    class Meta:
+        model = CustomerMarkup
+        fields = '__all__'
+
+class CustomerMarkupReadSerializer(serializers.ModelSerializer):
+
+    customer = CustomerReadSerializer(read_only = True)
+    markup = MarkupReadSerializer(read_only = True)
+    class Meta:
+
+        model = CustomerMarkup
+        fields = '__all__'
+
+class CustomerRewardPostSerializer(serializers.ModelSerializer):
+
+    class Meta:
+        model = CustomerReward
+        fields = '__all__'
+
+class CustomerRewardReadSerializer(serializers.ModelSerializer):
+
+    customer = CustomerReadSerializer(read_only = True)
+    reward = RewardReadSerializer(read_only = True)
+    class Meta:
+
+        model = CustomerReward
+        fields = '__all__'
 class RoleSerializer(serializers.ModelSerializer):
     class Meta:
         model = Role
@@ -326,4 +355,32 @@ class IdUserCustomersSerializer(serializers.ModelSerializer):
             'interface_id'
             ]
 
+class GroupeReadSerializer(serializers.ModelSerializer):
+    customers = CustomerReadSerializer(many = True, read_only = True)
+    markup = MarkupReadSerializer(many = True, read_only = True)
+    reward = RewardReadSerializer(many = True, read_only = True)
+    class Meta:
+        model = Groupe
+        fields = '__all__'
+
+class GroupePostSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = Groupe
+        fields = '__all__'
+
+class CustomerGroupPostSerializer(serializers.ModelSerializer):
+
+    class Meta:
+        model = CustomerGroup
+        fields = '__all__'
+
+class CustomerGroupReadSerializer(serializers.ModelSerializer):
+    groupe = GroupeReadSerializer(read_only = True)
+    customer = CustomerReadSerializer(read_only = True)
+    class Meta:
+        model = CustomerGroup
+        fields = [
+            'groupe',
+            'customer'
+        ]
 

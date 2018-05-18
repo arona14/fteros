@@ -233,28 +233,32 @@ class Contract(BaseEntity):
 class Markup(BaseEntity):
     # The base contract that the customer is qualified
     contract = models.ForeignKey(Contract, related_name = 'markup_contract', on_delete = models.CASCADE)
-
-    # The customer for the contract
-    customer = models.ForeignKey(Customer, related_name = 'agency_markup', on_delete = models.CASCADE)
-    
     # association class for airlines (customer of vendor type) exceptions
     x_airlines = models.ManyToManyField(Customer, related_name = 'contracts' , through='ExceptionAirline')
-
     # Markup Reward Dropnet
     owrt = models.CharField(max_length = 2, choices = OWRT, null = True, blank = True)
     net = models.CharField(max_length = 10, default = '0', null = True, blank = True)
     pub = models.CharField(max_length = 10, default = '0', null = True, blank = True)
     com = models.CharField(max_length = 10, default = '0', null = True, blank = True)
 
+class CustomerMarkup(BaseEntity):
+
+    customer = models.ForeignKey(Customer, related_name = 'agency_markup', on_delete = models.CASCADE)
+    markup = models.ForeignKey(Markup, on_delete = models.CASCADE)
+
 class Reward(BaseEntity):
 
     contract = models.ForeignKey(Contract, related_name = 'reward_contract', on_delete = models.CASCADE)
-    customer = models.ForeignKey(Customer, related_name = 'agency_reward', on_delete = models.CASCADE)
+    #customer = models.ForeignKey(Customer, related_name = 'agency_reward', on_delete = models.CASCADE)
     owrt = models.CharField(max_length = 2, choices = OWRT, null = True, blank = True)
     pax_type = models.CharField(max_length = 50, null = True, blank = True)
     airline = models.CharField(max_length = 20, null =True, blank = True)
     reward_value = models.CharField(max_length = 10, default = '0', null = True, blank = True)
 
+class CustomerReward(BaseEntity):
+
+    customer = models.ForeignKey(Customer, related_name = 'agency_reward', on_delete = models.CASCADE)
+    reward = models.ForeignKey(Reward, on_delete = models.CASCADE)
 class Dropnet(BaseEntity):
 
     contract = models.ForeignKey(Contract, related_name = 'dropnet_contract', on_delete = models.CASCADE)
@@ -280,3 +284,15 @@ class UserCustomerList(BaseEntity):
     user = models.ForeignKey(User, on_delete=models.CASCADE)
     class Meta:
         unique_together = ("customer", "user")
+
+class Groupe(BaseEntity):
+
+    name = models.CharField(max_length=50)
+    customers = models.ManyToManyField(Customer, related_name = 'customer_group' , through='CustomerGroup')
+    markup = models.ManyToManyField(Markup, related_name = 'markup_group', blank=True)
+    reward = models.ManyToManyField(Reward, related_name = 'reward_group', blank=True)
+
+class CustomerGroup(BaseEntity):
+
+    groupe = models.ForeignKey(Groupe, on_delete=models.CASCADE)
+    customer = models.ForeignKey(Customer, on_delete=models.CASCADE)

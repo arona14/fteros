@@ -27,6 +27,10 @@ urlpatterns = [
     url(r'^markups/(?P<id>\d+)/$', MarkupRudView.as_view(), name='markup-rud' ),
     url(r'^rewards/$', RewardAPIView.as_view(), name='reward-list' ),
     url(r'^rewards/(?P<id>\d+)/$', RewardRudView.as_view(), name='reward-rud' ),
+    url(r'^customermarkups/$', CustomerMarkupAPIView.as_view(), name='customermarkup-list' ),
+    url(r'^customermarkups/(?P<id>\d+)/$', CustomerMarkupRudView.as_view(), name='customermarkup-rud' ),
+    url(r'^customerrewards/$', CustomerRewardAPIView.as_view(), name='customerreward-list' ),
+    url(r'^customerrewards/(?P<id>\d+)/$', CustomerRewardRudView.as_view(), name='customerreward-rud' ),
     url(r'^dropnets/$', DropnetAPIView.as_view(), name='dropnet-list' ),
     url(r'^dropnets/(?P<id>\d+)/$', DropnetRudView.as_view(), name='dronet-rud' ),
     url(r'^communications/$', CommunicationAPIView.as_view(), name='communication-create' ),
@@ -40,6 +44,10 @@ urlpatterns = [
     url(r'^customersaffiliated/$', CustomersAffiliateView.as_view(), name='Customers-Affiliate'),
     url(r'^userscustomersaffiliate/$', UsersCustomerAffiliateView.as_view(), name='Users-Customer-Affiliate'),
     url(r'^customersuser/$', IdUserCustomerView.as_view(), name='user-customers' ),
+    url(r'^groups/$', GroupeAPIView.as_view(), name='group-create' ),
+    url(r'^groups/(?P<id>\d+)/$', GroupeRudView.as_view(), name='group-rud' ),
+    url(r'^customergroup/$', CustomerGroupAPIView.as_view(), name='customergroup-create' ),
+    url(r'^customergroup/(?P<id>\d+)/$', CustomerGroupRudView.as_view(), name='customergroup-rud' ),
     
     
 ]

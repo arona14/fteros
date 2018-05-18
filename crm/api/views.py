@@ -1,7 +1,8 @@
 from django.db.models import Q
 from rest_framework import generics, mixins, status
 from crm.api.serializers import *
-from crm.models import Affiliate, Customer, Contract, Markup, Reward, Dropnet, ExceptionAirline, User, UserManager, Sign,Pcc,UserCustomerList
+from crm.models import Affiliate, Customer, Contract, Markup, Reward, Dropnet, ExceptionAirline, User, UserManager, Sign,Pcc,UserCustomerList,\
+Groupe,CustomerGroup,CustomerMarkup,CustomerReward
 from rest_framework.response import Response
 from django.http import Http404
 
@@ -131,15 +132,6 @@ class MarkupAPIView(mixins.CreateModelMixin, generics.ListAPIView):
 
     def get_queryset(self):
         qs = Markup.objects.all() 
-        
-        # ------ Getting querystrings if exists ----------
-        dk = self.request.GET.get("q")
-        
-        if dk is not None:
-            qs = qs.filter(
-                Q(customer__agency_id__iexact = dk) 
-                ).distinct()
-
         return qs
 
     def post(self, request, *args, **kwargs):
@@ -152,17 +144,18 @@ class MarkupRudView(generics.RetrieveUpdateDestroyAPIView):
     def get_queryset(self):
         return Markup.objects.all()
 
-class RewardAPIView(mixins.CreateModelMixin, generics.ListAPIView):
+class CustomerMarkupAPIView(mixins.CreateModelMixin, generics.ListAPIView):
+
     lookup_field = 'id'
+    
     def get_serializer_class(self):
         if self.request.method == 'POST':
-            return RewardPostSerializer
-        return RewardReadSerializer
+            return CustomerMarkupPostSerializer
+        return CustomerMarkupReadSerializer
 
     def get_queryset(self):
-        qs = Reward.objects.all() 
+        qs = CustomerMarkup.objects.all() 
         
-        # ------ Getting querystrings if exists ----------
         dk = self.request.GET.get("q")
         
         if dk is not None:
@@ -171,6 +164,27 @@ class RewardAPIView(mixins.CreateModelMixin, generics.ListAPIView):
                 ).distinct()
 
         return qs
+
+    def post(self, request, *args, **kwargs):
+        return self.create(request, *args, **kwargs) 
+
+class CustomerMarkupRudView(generics.RetrieveUpdateDestroyAPIView):
+    lookup_field = 'id' 
+    serializer_class = CustomerMarkupPostSerializer
+
+    def get_queryset(self):
+        return CustomerMarkup.objects.all()
+class RewardAPIView(mixins.CreateModelMixin, generics.ListAPIView):
+    lookup_field = 'id'
+    def get_serializer_class(self):
+        if self.request.method == 'POST':
+            return RewardPostSerializer
+        return RewardReadSerializer
+
+    def get_queryset(self):
+        qs = Reward.objects.all()
+        return qs
+
     def post(self, request, *args, **kwargs):
         return self.create(request, *args, **kwargs)
 
@@ -181,6 +195,36 @@ class RewardRudView(generics.RetrieveUpdateDestroyAPIView):
     def get_queryset(self):
         return Reward.objects.all()
 
+class CustomerRewardAPIView(mixins.CreateModelMixin, generics.ListAPIView):
+
+    lookup_field = 'id'
+    
+    def get_serializer_class(self):
+        if self.request.method == 'POST':
+            return CustomerRewardPostSerializer
+        return CustomerRewardReadSerializer
+
+    def get_queryset(self):
+        qs = CustomerReward.objects.all() 
+        
+        dk = self.request.GET.get("q")
+        
+        if dk is not None:
+            qs = qs.filter(
+                Q(customer__agency_id__iexact = dk) 
+                ).distinct()
+
+        return qs
+
+    def post(self, request, *args, **kwargs):
+        return self.create(request, *args, **kwargs) 
+
+class CustomerRewardRudView(generics.RetrieveUpdateDestroyAPIView):
+    lookup_field = 'id' 
+    serializer_class = CustomerRewardReadSerializer
+
+    def get_queryset(self):
+        return CustomerReward.objects.all()
 class DropnetAPIView(mixins.CreateModelMixin, generics.ListAPIView):
     lookup_field = 'id'
     def get_serializer_class(self):
@@ -415,3 +459,68 @@ class IdUserCustomerView(generics.ListAPIView):
             qs = []
 
         return qs
+
+class GroupeAPIView(mixins.CreateModelMixin, generics.ListAPIView):
+    """Groupe list and post view class"""
+
+
+    lookup_field = 'id' 
+    def get_serializer_class(self):
+        if self.request.method == 'POST':
+            return GroupePostSerializer
+        return GroupeReadSerializer
+    def get_queryset(self):
+        qs = Groupe.objects.all()
+        query = self.request.GET.get("name")
+        if query is not None:
+            qs = qs.filter(
+                Q(name__icontains=query)
+                ).distinct()
+        return qs
+
+    def post(self, request, *args, **kwargs):
+        return self.create(request, *args, **kwargs)
+
+class GroupeRudView(generics.RetrieveUpdateDestroyAPIView):
+    """Groupe Retrieve Update Destroy"""
+
+
+    lookup_field = 'id'
+    serializer_class = GroupePostSerializer
+
+    def get_queryset(self):
+        return Groupe.objects.all()
+
+class CustomerGroupAPIView(mixins.CreateModelMixin, generics.ListAPIView):
+    """Customer Group API view class"""
+
+
+    lookup_field = 'id'
+
+    def get_serializer_class(self):
+        if self.request.method == 'POST':
+            return CustomerGroupPostSerializer
+        return CustomerGroupReadSerializer
+
+    def get_queryset(self):
+        qs = CustomerGroup.objects.all()
+        query = self.request.GET.get("q")
+        if query is not None:
+            qs = qs.filter(
+                #1Q(groupe__name__iexact=query)|
+                Q(customer__id__iexact=query)
+                ).distinct()
+        return qs
+
+    def post(self, request, *args, **kwargs):
+        return self.create(request, *args, **kwargs)
+
+class CustomerGroupRudView(generics.RetrieveUpdateDestroyAPIView):
+    """Customer Groupe Retrieve Update Destroy view class"""
+
+    
+    lookup_field = 'id' 
+    serializer_class =CustomerGroupPostSerializer
+
+    def get_queryset(self):
+        return CustomerGroup.objects.all()
